@@ -45,10 +45,15 @@ struct ContentViewModel: Savable {
     }
 }
 
-struct ContentView: View {
+struct ContentView: View, Savable {
+    private let viewModel = ContentViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
+        Text("\(integer(forKey: .highScore))")
             .padding()
+            .onTapGesture(count: 1, perform: {
+                self.set(42, forKey: .highScore)
+            })
     }
 }
 
